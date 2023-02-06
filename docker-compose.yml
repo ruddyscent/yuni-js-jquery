@@ -3,7 +3,7 @@ version: '3.1'
 
 services:
   node:
-    user: "${UID}:${GID}"
+    user: ${UID}:${GID}
     image: node
     volumes:
       - ./home:/usr/src/app
@@ -11,15 +11,28 @@ services:
       - 52273:3000
     stdin_open: true
     tty: true
+    working_dir: /usr/src/app
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_USER: ${MARIADB_USER}"
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
 
   db:
     image: mariadb
     restart: always
     ports:
       - 3306:3306
+    volumes:
+      - ./db/conf.d:/etc/mysql/conf.d
+      - ./db/data:/var/lib/mysql
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_USER: ${MARIADB_USER}"
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
 
   adminer:
     image: adminer
     restart: always
     ports:
       - 8080:8080
+
