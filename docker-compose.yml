@@ -12,6 +12,10 @@ services:
     stdin_open: true
     tty: true
     working_dir: /usr/src/app
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_USER: ${MARIADB_USER}"
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
 
   db:
     image: mariadb
