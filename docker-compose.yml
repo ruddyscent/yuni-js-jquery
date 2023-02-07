@@ -8,7 +8,7 @@ services:
     volumes:
       - ./home:/usr/src/app
     ports:
-      - 52273:3000
+      - 52273:52273
     stdin_open: true
     tty: true
     working_dir: /usr/src/app
